@@ -100,6 +100,10 @@
         view.frame = CGRectMake(0.0f, 0.0f, size.width, size.height);
         [JSQMessagesMediaViewBubbleImageMasker applyBubbleImageMaskToMediaView:view isOutgoing:self.appliesMediaViewMaskAsOutgoing];
         self.cachedPlaceholderView = view;
+    }else{
+        UIActivityIndicatorView *spinner = (UIActivityIndicatorView *) [_cachedPlaceholderView viewWithTag:207];
+        [spinner startAnimating];
+        
     }
     
     return self.cachedPlaceholderView;

@@ -31,7 +31,7 @@
     UIColor *lightGrayColor = [UIColor jsq_messageBubbleLightGrayColor];
     UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     spinner.color = [lightGrayColor jsq_colorByDarkeningColorWithValue:0.4f];
-    
+    spinner.tag = 207;
     JSQMessagesMediaPlaceholderView *view = [[JSQMessagesMediaPlaceholderView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 200.0f, 120.0f)
                                                                                    backgroundColor:lightGrayColor
                                                                              activityIndicatorView:spinner];
