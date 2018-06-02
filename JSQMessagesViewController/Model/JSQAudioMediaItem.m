@@ -35,7 +35,6 @@
 @property (strong, nonatomic) UILabel *progressLabel;
 @property (strong, nonatomic) NSTimer *progressTimer;
 
-@property (strong, nonatomic) AVAudioPlayer *audioPlayer;
 
 @end
 
@@ -102,8 +101,17 @@
 
 - (void)setAudioDataWithUrl:(NSURL *)audioURL
 {
-    _audioData = [NSData dataWithContentsOfURL:audioURL];
-    [self clearCachedMediaViews];
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
+    dispatch_async(queue, ^{
+        // Perform async operation
+        // Call your method/function here
+        NSData *data = [NSData dataWithContentsOfURL:audioURL];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            // Update UI
+            self->_audioData = data;
+            [self clearCachedMediaViews];
+        });
+    });
 }
 
 - (void)setAppliesMediaViewMaskAsOutgoing:(BOOL)appliesMediaViewMaskAsOutgoing

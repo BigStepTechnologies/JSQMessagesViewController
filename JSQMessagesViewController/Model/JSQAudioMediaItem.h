@@ -114,6 +114,11 @@ didChangeAudioCategory:(NSString *)category
  */
 - (void)setAudioDataWithUrl:(nonnull NSURL *)audioURL;
 
+/**
+ *  Exposed to stop playback when leaving the view.
+ */
+@property (strong, nonatomic) AVAudioPlayer *audioPlayer;
+    
 @end
 
 NS_ASSUME_NONNULL_END
