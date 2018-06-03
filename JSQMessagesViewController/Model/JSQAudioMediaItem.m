@@ -29,8 +29,6 @@
 
 @property (strong, nonatomic) UIView *cachedMediaView;
 
-@property (nonatomic) NSNumber *itemIndex;
-
 @property (strong, nonatomic) UIButton *playButton;
 
 @property (strong, nonatomic) UIProgressView *progressView;
@@ -60,12 +58,6 @@
 
 - (instancetype)initWithData:(NSData *)audioData
 {
-    return [self initWithData:audioData audioViewAttributes:[[JSQAudioMediaViewAttributes alloc] init]];
-}
-
-- (instancetype)initWithData:(NSData *)audioData forIndex:(NSNumber *) index
-{
-    _itemIndex = index;
     return [self initWithData:audioData audioViewAttributes:[[JSQAudioMediaViewAttributes alloc] init]];
 }
 
@@ -107,7 +99,7 @@
     [self clearCachedMediaViews];
 }
 
-- (void)setAudioDataWithUrl:(NSURL *)audioURL
+- (void)setAudioDataWithUrl:(NSURL *)audioURL forIndex:(NSInteger)index
 {
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0ul);
     dispatch_async(queue, ^{
@@ -119,7 +111,7 @@
             self->_audioData = data;
             [self clearCachedMediaViews];
             if (self.delegate) {
-                [self.delegate audioMediaItemLoaded:_itemIndex];
+                [self.delegate audioMediaItemLoaded:index];
             }
         });
     });
