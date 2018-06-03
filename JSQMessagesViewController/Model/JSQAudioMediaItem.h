@@ -38,7 +38,7 @@ didChangeAudioCategory:(NSString *)category
 /**
  *  Tells the delegate if the specified `JSQAudioMediaItem` get loaded by the url.
  */
-- (void)audioMediaItemLoaded:(int *)atIndex;
+- (void)audioMediaItemLoaded:(NSNumber *)atIndex;
 
 @end
 
@@ -124,7 +124,7 @@ didChangeAudioCategory:(NSString *)category
  *  you may initialize a `JSQAudioMediaItem` with a `nil` audioData.
  *  Once the audio is available you can set the `audioData` property.
  */
-- (instancetype)initWithData:(nullable NSData *)audioData forIndex:(int *)index;
+- (instancetype)initWithData:(nullable NSData *)audioData forIndex:(NSNumber *)index;
 
 /**
  *  Sets or updates the data object in an audio media item with the data specified at audioURL.

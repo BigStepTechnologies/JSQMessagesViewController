@@ -29,7 +29,7 @@
 
 @property (strong, nonatomic) UIView *cachedMediaView;
 
-@property (nonatomic) int *itemIndex;
+@property (nonatomic) NSNumber *itemIndex;
 
 @property (strong, nonatomic) UIButton *playButton;
 
@@ -63,7 +63,7 @@
     return [self initWithData:audioData audioViewAttributes:[[JSQAudioMediaViewAttributes alloc] init]];
 }
 
-- (instancetype)initWithData:(NSData *)audioData forIndex:(int *) index
+- (instancetype)initWithData:(NSData *)audioData forIndex:(NSNumber *) index
 {
     _itemIndex = index;
     return [self initWithData:audioData audioViewAttributes:[[JSQAudioMediaViewAttributes alloc] init]];
