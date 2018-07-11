@@ -538,11 +538,15 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
         needsAvatar = NO;
     }
 
+    cell.cellTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForCellTopLabelAtIndexPath:indexPath];
+    cell.messageBubbleTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:indexPath];
+    cell.cellBottomLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForCellBottomLabelAtIndexPath:indexPath];
+    
     id<JSQMessageAvatarImageDataSource> avatarImageDataSource = nil;
     if (needsAvatar) {
         avatarImageDataSource = [collectionView.dataSource collectionView:collectionView avatarImageDataForItemAtIndexPath:indexPath];
         if (avatarImageDataSource != nil) {
-
+            
             UIImage *avatarImage = [avatarImageDataSource avatarImage];
             if (avatarImage == nil) {
                 cell.avatarImageView.image = [avatarImageDataSource avatarPlaceholderImage];
@@ -553,11 +557,9 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
                 cell.avatarImageView.highlightedImage = [avatarImageDataSource avatarHighlightedImage];
             }
         }
+    }else{
+        cell.cellBottomLabel.textInsets = UIEdgeInsetsMake(0.0f, 10.0f, 0.0f, 15.0f);
     }
-
-    cell.cellTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForCellTopLabelAtIndexPath:indexPath];
-    cell.messageBubbleTopLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:indexPath];
-    cell.cellBottomLabel.attributedText = [collectionView.dataSource collectionView:collectionView attributedTextForCellBottomLabelAtIndexPath:indexPath];
 
     CGFloat bubbleTopLabelInset = (avatarImageDataSource != nil) ? 60.0f : 15.0f;
 
