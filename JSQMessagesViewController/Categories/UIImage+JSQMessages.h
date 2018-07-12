@@ -69,6 +69,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIImage *)jsq_defaultAccessoryImage;
 
 /**
+ *  @return The default input toolbar send button image.
+ */
++ (UIImage *)jsq_defaultSendButtonImage;
+
+/**
  *  @return The default typing indicator image.
  */
 + (UIImage *)jsq_defaultTypingIndicatorImage;

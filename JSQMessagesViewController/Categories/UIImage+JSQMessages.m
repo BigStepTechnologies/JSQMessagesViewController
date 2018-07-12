@@ -90,6 +90,11 @@
     return [UIImage jsq_bubbleImageFromBundleWithName:@"attach"];
 }
 
++ (UIImage *)jsq_defaultSendButtonImage
+{
+    return [UIImage jsq_bubbleImageFromBundleWithName:@"forward"];
+}
+
 + (UIImage *)jsq_defaultTypingIndicatorImage
 {
     return [UIImage jsq_bubbleImageFromBundleWithName:@"typing"];
