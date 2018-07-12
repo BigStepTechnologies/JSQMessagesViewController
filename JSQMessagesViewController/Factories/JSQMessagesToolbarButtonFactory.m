@@ -50,7 +50,7 @@
 - (UIButton *)defaultAccessoryButtonItem
 {
     UIImage *accessoryImage = [UIImage jsq_defaultAccessoryImage];
-    UIImage *highlightedImage = [accessoryImage jsq_imageMaskedWithColor:[UIColor darkGrayColor]];
+    UIImage *highlightedImage = [accessoryImage jsq_imageMaskedWithColor:[UIColor jsq_messageBubbleBlueColor]];
 
     UIButton *accessoryButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f,34.0f, 34.0f)];
     [accessoryButton setImage:highlightedImage forState:UIControlStateNormal];
