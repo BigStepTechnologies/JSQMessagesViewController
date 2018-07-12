@@ -53,7 +53,7 @@
     UIImage *normalImage = [accessoryImage jsq_imageMaskedWithColor:[UIColor lightGrayColor]];
     UIImage *highlightedImage = [accessoryImage jsq_imageMaskedWithColor:[UIColor darkGrayColor]];
 
-    UIButton *accessoryButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 40.f, 40.0f)];
+    UIButton *accessoryButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, accessoryImage.size.width, 34.0f)];
     [accessoryButton setImage:normalImage forState:UIControlStateNormal];
     [accessoryButton setImage:highlightedImage forState:UIControlStateHighlighted];
 
@@ -73,7 +73,7 @@
     UIImage *normalImage = [sendImage jsq_imageMaskedWithColor:[UIColor lightGrayColor]];
     UIImage *highlightedImage = [sendImage jsq_imageMaskedWithColor:[UIColor jsq_messageBubbleBlueColor]];
     
-    UIButton *sendButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 40.0f, 40.0f)];
+    UIButton *sendButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 34.0f, 34.0f)];
     [sendButton setImage:normalImage forState:UIControlStateDisabled];
     [sendButton setImage:highlightedImage forState:UIControlStateNormal];
     [sendButton setImage:highlightedImage forState:UIControlStateHighlighted];
