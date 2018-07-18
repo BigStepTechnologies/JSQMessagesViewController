@@ -522,11 +522,11 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
         cell.mediaView = [messageMedia mediaView] ?: [messageMedia mediaPlaceholderView];
         NSParameterAssert(cell.mediaView != nil);
     }else if(isMetaMessage){
-        cell.textView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
+        cell.textView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
         cell.textView.text = [messageItem text];
         cell.textView.textContainerInset = UIEdgeInsetsMake(0.0f, 30.0f, 0.0f, 30.0f);
         cell.textView.textAlignment = NSTextAlignmentCenter;
-        cell.textView.textColor = [UIColor grayColor];
+        cell.textView.textColor = [UIColor lightGrayColor];
         NSParameterAssert(cell.textView.text != nil);
         
         cell.messageBubbleImageView.image = nil;
@@ -535,6 +535,7 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     }else {
         cell.textView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
         cell.textView.text = [messageItem text];
+        cell.textView.textAlignment = NSTextAlignmentNatural;
         cell.textView.textColor = isOutgoingMessage ? [UIColor whiteColor]:[UIColor blackColor];
         NSParameterAssert(cell.textView.text != nil);
         
