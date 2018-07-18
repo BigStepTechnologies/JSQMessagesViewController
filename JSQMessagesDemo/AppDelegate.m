@@ -26,8 +26,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Load our default settings
-    [NSUserDefaults saveIncomingAvatarSetting:YES];
-    [NSUserDefaults saveOutgoingAvatarSetting:YES];
+    [NSUserDefaults saveIncomingAvatarSetting:NO];
+    [NSUserDefaults saveOutgoingAvatarSetting:NO];
     
     return YES;
 }

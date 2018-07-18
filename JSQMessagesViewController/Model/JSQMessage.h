@@ -54,6 +54,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign, nonatomic, readonly) BOOL isMediaMessage;
 
 /**
+ *  Returns a boolean value specifying whether or not the message contains media.
+ *  If `NO`, the message contains text. If `YES`, the message contains media.
+ *  The value of this property depends on how the object was initialized.
+ */
+@property (assign, nonatomic, readonly) BOOL isMetaMessage;
+
+/**
  *  Returns the body text of the message, or `nil` if the message is a media message.
  *  That is, if `isMediaMessage` is equal to `YES` then this value will be `nil`.
  */

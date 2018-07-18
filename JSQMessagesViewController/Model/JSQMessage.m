@@ -84,6 +84,7 @@
     if (self) {
         _senderId = [senderId copy];
         _senderDisplayName = [senderDisplayName copy];
+        _isMetaMessage = [_senderDisplayName isEqual: @"PM_Meta"];
         _date = [date copy];
         _isMediaMessage = isMedia;
     }
@@ -148,6 +149,7 @@
         _senderDisplayName = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(senderDisplayName))];
         _date = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(date))];
         _isMediaMessage = [aDecoder decodeBoolForKey:NSStringFromSelector(@selector(isMediaMessage))];
+        _isMetaMessage = [aDecoder decodeBoolForKey:NSStringFromSelector(@selector(isMetaMessage))];
         _text = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(text))];
         _media = [aDecoder decodeObjectForKey:NSStringFromSelector(@selector(media))];
     }
@@ -160,6 +162,7 @@
     [aCoder encodeObject:self.senderDisplayName forKey:NSStringFromSelector(@selector(senderDisplayName))];
     [aCoder encodeObject:self.date forKey:NSStringFromSelector(@selector(date))];
     [aCoder encodeBool:self.isMediaMessage forKey:NSStringFromSelector(@selector(isMediaMessage))];
+    [aCoder encodeBool:self.isMetaMessage forKey:NSStringFromSelector(@selector(isMetaMessage))];
     [aCoder encodeObject:self.text forKey:NSStringFromSelector(@selector(text))];
 
     if ([self.media conformsToProtocol:@protocol(NSCoding)]) {

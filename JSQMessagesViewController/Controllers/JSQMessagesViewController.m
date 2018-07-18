@@ -503,6 +503,7 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 
     BOOL isOutgoingMessage = [self isOutgoingMessage:messageItem];
     BOOL isMediaMessage = [messageItem isMediaMessage];
+    BOOL isMetaMessage = [messageItem isMetaMessage];
 
     NSString *cellIdentifier = nil;
     if (isMediaMessage) {
@@ -516,18 +517,26 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     cell.accessibilityIdentifier = [NSString stringWithFormat:@"(%ld, %ld)", (long)indexPath.section, (long)indexPath.row];
     cell.delegate = collectionView;
 
-    if (!isMediaMessage) {
-        cell.textView.text = [messageItem text];
-        NSParameterAssert(cell.textView.text != nil);
-
-        id<JSQMessageBubbleImageDataSource> bubbleImageDataSource = [collectionView.dataSource collectionView:collectionView messageBubbleImageDataForItemAtIndexPath:indexPath];
-        cell.messageBubbleImageView.image = [bubbleImageDataSource messageBubbleImage];
-        cell.messageBubbleImageView.highlightedImage = [bubbleImageDataSource messageBubbleHighlightedImage];
-    }
-    else {
+    if (isMediaMessage) {
         id<JSQMessageMediaData> messageMedia = [messageItem media];
         cell.mediaView = [messageMedia mediaView] ?: [messageMedia mediaPlaceholderView];
         NSParameterAssert(cell.mediaView != nil);
+    }else if(isMetaMessage){
+        cell.textView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
+        cell.textView.text = [messageItem text];
+        cell.textView.textContainerInset = UIEdgeInsetsMake(0.0f, 30.0f, 0.0f, 30.0f);
+        cell.textView.textAlignment = NSTextAlignmentCenter;
+        NSParameterAssert(cell.textView.text != nil);
+
+    }else {
+        cell.textView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
+        cell.textView.text = [messageItem text];
+        NSParameterAssert(cell.textView.text != nil);
+        
+        id<JSQMessageBubbleImageDataSource> bubbleImageDataSource = [collectionView.dataSource collectionView:collectionView messageBubbleImageDataForItemAtIndexPath:indexPath];
+        cell.messageBubbleImageView.image = [bubbleImageDataSource messageBubbleImage];
+        cell.messageBubbleImageView.highlightedImage = [bubbleImageDataSource messageBubbleHighlightedImage];
+       
     }
 
     BOOL needsAvatar = YES;
