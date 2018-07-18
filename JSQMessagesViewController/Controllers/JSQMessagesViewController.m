@@ -526,11 +526,16 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
         cell.textView.text = [messageItem text];
         cell.textView.textContainerInset = UIEdgeInsetsMake(0.0f, 30.0f, 0.0f, 30.0f);
         cell.textView.textAlignment = NSTextAlignmentCenter;
+        cell.textView.textColor = [UIColor grayColor];
         NSParameterAssert(cell.textView.text != nil);
+        
+        cell.messageBubbleImageView.image = nil;
+        cell.messageBubbleImageView.highlightedImage = nil;
 
     }else {
         cell.textView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
         cell.textView.text = [messageItem text];
+        cell.textView.textColor = isOutgoingMessage ? [UIColor whiteColor]:[UIColor blackColor];
         NSParameterAssert(cell.textView.text != nil);
         
         id<JSQMessageBubbleImageDataSource> bubbleImageDataSource = [collectionView.dataSource collectionView:collectionView messageBubbleImageDataForItemAtIndexPath:indexPath];
