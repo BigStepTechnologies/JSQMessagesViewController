@@ -522,7 +522,7 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
         cell.mediaView = [messageMedia mediaView] ?: [messageMedia mediaPlaceholderView];
         NSParameterAssert(cell.mediaView != nil);
     }else if(isMetaMessage){
-        cell.textView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+        cell.textView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
         cell.textView.text = [messageItem text];
         cell.textView.textContainerInset = UIEdgeInsetsMake(0.0f, 30.0f, 0.0f, 30.0f);
         cell.textView.textAlignment = NSTextAlignmentCenter;
