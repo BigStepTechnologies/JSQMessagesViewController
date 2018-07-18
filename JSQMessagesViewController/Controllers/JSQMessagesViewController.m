@@ -524,7 +524,7 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     }else if(isMetaMessage){
         cell.textView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
         cell.textView.text = [messageItem text];
-        cell.textView.textContainerInset = UIEdgeInsetsMake(0.0f, 30.0f, 0.0f, 30.0f);
+        cell.textView.textContainerInset = UIEdgeInsetsMake(5.0f, 30.0f, 5.0f, 30.0f);
         cell.textView.textAlignment = NSTextAlignmentCenter;
         cell.textView.textColor = [UIColor lightGrayColor];
         NSParameterAssert(cell.textView.text != nil);
