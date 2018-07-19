@@ -65,10 +65,10 @@
     self.returnKeyType = UIReturnKeyDefault;
 
     self.text = nil;
-
+    
     _placeHolder = nil;
     _placeHolderTextColor = [UIColor lightGrayColor];
-    _placeHolderInsets = UIEdgeInsetsMake(5.0, 9.0, 5.0, 9.0);
+    _placeHolderInsets = UIEdgeInsetsMake(5.0, 10.0, 5.0, 10.0);
 
     [self associateConstraints];
 
