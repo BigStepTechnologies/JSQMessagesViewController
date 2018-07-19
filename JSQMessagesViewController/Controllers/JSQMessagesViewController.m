@@ -653,7 +653,9 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 {
     //  disable menu for media messages
     id<JSQMessageData> messageItem = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
-    if ([messageItem isMediaMessage]) {
+    if ([messageItem isMetaMessage]){
+        return NO;
+    }else if ([messageItem isMediaMessage]) {
 
         if ([[messageItem media] respondsToSelector:@selector(mediaDataType)]) {
             return YES;
