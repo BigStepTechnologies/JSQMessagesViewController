@@ -653,16 +653,9 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 {
     //  disable menu for media messages
     id<JSQMessageData> messageItem = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
-    if ([messageItem isMetaMessage]){
-        return NO;
-    }else if ([messageItem isMediaMessage]) {
-
-        if ([[messageItem media] respondsToSelector:@selector(mediaDataType)]) {
-            return YES;
-        }
+    if ([messageItem isMetaMessage] || [messageItem isMediaMessage]){
         return NO;
     }
-
     self.selectedIndexPathForMenu = indexPath;
 
     //  textviews are selectable to allow data detectors
@@ -682,9 +675,11 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     return YES;
 }
 
-- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
+- (BOOL)collectionView:(JSQMessagesCollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
 {
-    if (action == @selector(copy:) || action == @selector(delete:)) {
+    id<JSQMessageData> messageItem = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
+    
+    if (![messageItem isMetaMessage] && (action == @selector(copy:) || action == @selector(delete:))) {
         return YES;
     }
 
