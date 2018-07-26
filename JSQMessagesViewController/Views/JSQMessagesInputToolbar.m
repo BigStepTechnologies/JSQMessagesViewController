@@ -47,13 +47,13 @@ static void * kJSQMessagesInputToolbarKeyValueObservingContext = &kJSQMessagesIn
 {
     [super awakeFromNib];
     self.backgroundColor = [UIColor whiteColor];
+    self.barTintColor = [UIColor whiteColor];
     self.jsq_isObserving = NO;
     self.sendButtonLocation = JSQMessagesInputSendButtonLocationRight;
     self.enablesSendButtonAutomatically = YES;
-
     self.preferredDefaultHeight = 44.0f;
     self.maximumHeight = NSNotFound;
-
+    self.clipsToBounds = YES;
     JSQMessagesToolbarContentView *toolbarContentView = [self loadToolbarContentView];
     toolbarContentView.frame = self.frame;
     [self addSubview:toolbarContentView];

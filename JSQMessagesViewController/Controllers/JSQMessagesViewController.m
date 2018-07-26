@@ -158,7 +158,7 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     self.inputToolbar.contentView.textView.placeHolder = [NSBundle jsq_localizedStringForKey:@"new_message"];
     self.inputToolbar.contentView.textView.accessibilityLabel = [NSBundle jsq_localizedStringForKey:@"new_message"];
     self.inputToolbar.contentView.textView.delegate = self;
-    self.inputToolbar.contentView.textView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    self.inputToolbar.contentView.textView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
     [self.inputToolbar removeFromSuperview];
 
     self.automaticallyScrollsToMostRecentMessage = YES;
@@ -260,7 +260,7 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    self.collectionView.collectionViewLayout.springinessEnabled = NO;
+    //self.collectionView.collectionViewLayout.springinessEnabled = NO;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -503,6 +503,7 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 
     BOOL isOutgoingMessage = [self isOutgoingMessage:messageItem];
     BOOL isMediaMessage = [messageItem isMediaMessage];
+    BOOL isMetaMessage = [messageItem isMetaMessage];
 
     NSString *cellIdentifier = nil;
     if (isMediaMessage) {
@@ -516,18 +517,34 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     cell.accessibilityIdentifier = [NSString stringWithFormat:@"(%ld, %ld)", (long)indexPath.section, (long)indexPath.row];
     cell.delegate = collectionView;
 
-    if (!isMediaMessage) {
-        cell.textView.text = [messageItem text];
-        NSParameterAssert(cell.textView.text != nil);
-
-        id<JSQMessageBubbleImageDataSource> bubbleImageDataSource = [collectionView.dataSource collectionView:collectionView messageBubbleImageDataForItemAtIndexPath:indexPath];
-        cell.messageBubbleImageView.image = [bubbleImageDataSource messageBubbleImage];
-        cell.messageBubbleImageView.highlightedImage = [bubbleImageDataSource messageBubbleHighlightedImage];
-    }
-    else {
+    if (isMediaMessage) {
         id<JSQMessageMediaData> messageMedia = [messageItem media];
         cell.mediaView = [messageMedia mediaView] ?: [messageMedia mediaPlaceholderView];
         NSParameterAssert(cell.mediaView != nil);
+    }else if(isMetaMessage){
+        cell.textView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
+        cell.textView.text = [messageItem text];
+        cell.textView.textContainerInset = UIEdgeInsetsMake(5.0f, 30.0f, 5.0f, 30.0f);
+        cell.textView.textAlignment = NSTextAlignmentCenter;
+        cell.textView.textColor = [UIColor lightGrayColor];
+        cell.textView.selectable = NO;
+        NSParameterAssert(cell.textView.text != nil);
+        
+        cell.messageBubbleImageView.image = nil;
+        cell.messageBubbleImageView.highlightedImage = nil;
+
+    }else {
+        cell.textView.font = [UIFont preferredFontForTextStyle:UIFontTextStyleSubheadline];
+        cell.textView.text = [messageItem text];
+        cell.textView.textAlignment = NSTextAlignmentNatural;
+        cell.textView.textColor = isOutgoingMessage ? [UIColor whiteColor]:[UIColor blackColor];
+        cell.textView.selectable = YES;
+        NSParameterAssert(cell.textView.text != nil);
+        
+        id<JSQMessageBubbleImageDataSource> bubbleImageDataSource = [collectionView.dataSource collectionView:collectionView messageBubbleImageDataForItemAtIndexPath:indexPath];
+        cell.messageBubbleImageView.image = [bubbleImageDataSource messageBubbleImage];
+        cell.messageBubbleImageView.highlightedImage = [bubbleImageDataSource messageBubbleHighlightedImage];
+       
     }
 
     BOOL needsAvatar = YES;
@@ -638,14 +655,15 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 {
     //  disable menu for media messages
     id<JSQMessageData> messageItem = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
-    if ([messageItem isMediaMessage]) {
-
+    if ([messageItem isMetaMessage]){
+        return NO;
+    }else if ([messageItem isMediaMessage]) {
+        
         if ([[messageItem media] respondsToSelector:@selector(mediaDataType)]) {
             return YES;
         }
         return NO;
     }
-
     self.selectedIndexPathForMenu = indexPath;
 
     //  textviews are selectable to allow data detectors
@@ -665,9 +683,11 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     return YES;
 }
 
-- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
+- (BOOL)collectionView:(JSQMessagesCollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
 {
-    if (action == @selector(copy:) || action == @selector(delete:)) {
+    id<JSQMessageData> messageItem = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
+    
+    if (![messageItem isMetaMessage] && (action == @selector(copy:) || action == @selector(delete:))) {
         return YES;
     }
 

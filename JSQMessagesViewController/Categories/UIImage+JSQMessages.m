@@ -87,7 +87,12 @@
 
 + (UIImage *)jsq_defaultAccessoryImage
 {
-    return [UIImage jsq_bubbleImageFromBundleWithName:@"clip"];
+    return [UIImage jsq_bubbleImageFromBundleWithName:@"attach"];
+}
+
++ (UIImage *)jsq_defaultSendButtonImage
+{
+    return [UIImage jsq_bubbleImageFromBundleWithName:@"forward"];
 }
 
 + (UIImage *)jsq_defaultTypingIndicatorImage
