@@ -527,7 +527,7 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
         cell.textView.textContainerInset = UIEdgeInsetsMake(5.0f, 30.0f, 5.0f, 30.0f);
         cell.textView.textAlignment = NSTextAlignmentCenter;
         cell.textView.textColor = [UIColor lightGrayColor];
-        cell.textView.selectable = NO;
+        //cell.textView.selectable = NO;
         NSParameterAssert(cell.textView.text != nil);
         
         cell.messageBubbleImageView.image = nil;
@@ -538,7 +538,7 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
         cell.textView.text = [messageItem text];
         cell.textView.textAlignment = NSTextAlignmentNatural;
         cell.textView.textColor = isOutgoingMessage ? [UIColor whiteColor]:[UIColor blackColor];
-        cell.textView.selectable = YES;
+        //cell.textView.selectable = YES;
         NSParameterAssert(cell.textView.text != nil);
         
         id<JSQMessageBubbleImageDataSource> bubbleImageDataSource = [collectionView.dataSource collectionView:collectionView messageBubbleImageDataForItemAtIndexPath:indexPath];
@@ -671,7 +671,7 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
     //  which conflicts with the collection view's UIMenuController
     //  temporarily disable 'selectable' to prevent this issue
     JSQMessagesCollectionViewCell *selectedCell = (JSQMessagesCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    selectedCell.textView.selectable = NO;
+    //selectedCell.textView.selectable = NO;
     
     //  it will reset the font and fontcolor when selectable is NO
     //  however, the actual font and fontcolor in textView do not get changed
@@ -868,10 +868,10 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
         return;
     }
 
-    //  per comment above in 'shouldShowMenuForItemAtIndexPath:'
-    //  re-enable 'selectable', thus re-enabling data detectors if present
-    JSQMessagesCollectionViewCell *selectedCell = (JSQMessagesCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:self.selectedIndexPathForMenu];
-    selectedCell.textView.selectable = YES;
+//    //  per comment above in 'shouldShowMenuForItemAtIndexPath:'
+//    //  re-enable 'selectable', thus re-enabling data detectors if present
+//    JSQMessagesCollectionViewCell *selectedCell = (JSQMessagesCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:self.selectedIndexPathForMenu];
+//    selectedCell.textView.selectable = NO;
     self.selectedIndexPathForMenu = nil;
 }
 

@@ -28,7 +28,7 @@
  *  Do not actually do anything like this.
  */
 
-static NSString * const kJSQDemoAvatarDisplayNameSquires = @"PM_Meta";
+static NSString * const kJSQDemoAvatarDisplayNameSquires = @"Ashish Gupta";
 static NSString * const kJSQDemoAvatarDisplayNameCook = @"Tim Cook";
 static NSString * const kJSQDemoAvatarDisplayNameJobs = @"Jobs";
 static NSString * const kJSQDemoAvatarDisplayNameWoz = @"Steve Wozniak";
