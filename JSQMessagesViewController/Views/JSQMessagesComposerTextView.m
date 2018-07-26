@@ -47,7 +47,7 @@
 
     self.scrollIndicatorInsets = UIEdgeInsetsMake(cornerRadius, 0.0f, cornerRadius, 0.0f);
 
-    self.textContainerInset = UIEdgeInsetsMake(5.0f, 9.0f, 5.0f, 9.0f);
+    self.textContainerInset = UIEdgeInsetsMake(7.0f, 9.0f, 5.0f, 9.0f);
     self.contentInset = UIEdgeInsetsMake(1.0f, 0.0f, 1.0f, 0.0f);
 
     self.scrollEnabled = YES;
@@ -68,7 +68,7 @@
     
     _placeHolder = nil;
     _placeHolderTextColor = [UIColor lightGrayColor];
-    _placeHolderInsets = UIEdgeInsetsMake(5.0, 10.0, 5.0, 10.0);
+    _placeHolderInsets = UIEdgeInsetsMake(7.0, 10.0, 5.0, 10.0);
 
     [self associateConstraints];
 
