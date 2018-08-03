@@ -50,7 +50,7 @@
 - (UIButton *)defaultAccessoryButtonItem
 {
     UIImage *accessoryImage = [UIImage jsq_defaultAccessoryImage];
-    UIImage *highlightedImage = [accessoryImage jsq_imageMaskedWithColor:[UIColor jsq_messageBubbleBlueColor]];
+    UIImage *highlightedImage = [accessoryImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 
     UIButton *accessoryButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f,34.0f, 34.0f)];
     [accessoryButton setImage:highlightedImage forState:UIControlStateNormal];
@@ -68,7 +68,7 @@
 {
     UIImage *sendImage = [UIImage jsq_defaultSendButtonImage];
     UIImage *normalImage = [sendImage jsq_imageMaskedWithColor:[UIColor lightGrayColor]];
-    UIImage *highlightedImage = [sendImage jsq_imageMaskedWithColor:[UIColor jsq_messageBubbleBlueColor]];
+    UIImage *highlightedImage = [normalImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     
     UIButton *sendButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 34.0f, 34.0f)];
     [sendButton setImage:normalImage forState:UIControlStateDisabled];
