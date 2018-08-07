@@ -326,7 +326,12 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 {
     NSAssert(NO, @"Error! required method not implemented in subclass. Need to implement %s", __PRETTY_FUNCTION__);
 }
-
+    
+- (void)didChangeKeyboadFrame:(CGRect *)frame
+{
+    NSAssert(NO, @"Error! required method not implemented in subclass. Need to implement %s", __PRETTY_FUNCTION__);
+}
+    
 - (void)didPressAccessoryButton:(UIButton *)sender
 {
     NSAssert(NO, @"Error! required method not implemented in subclass. Need to implement %s", __PRETTY_FUNCTION__);
@@ -955,6 +960,8 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 
     CGRect keyboardEndFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
 
+    [self didChangeKeyboadFrame:keyboardEndFrame];
+    
     if (CGRectIsNull(keyboardEndFrame)) {
         return;
     }

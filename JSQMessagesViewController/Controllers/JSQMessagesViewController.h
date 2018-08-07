@@ -198,6 +198,12 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param sender The accessory button that was pressed by the user.
  */
+- (void)didChangeKeyboadFrame:(CGRect)frame;
+/**
+ *  This method is called when the user taps the accessory button on the `inputToolbar`.
+ *
+ *  @param sender The accessory button that was pressed by the user.
+ */
 - (void)didPressAccessoryButton:(UIButton *)sender;
 
 /**
