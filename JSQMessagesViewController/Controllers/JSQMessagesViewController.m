@@ -692,8 +692,12 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 {
     id<JSQMessageData> messageItem = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
     
-    if (![messageItem isMetaMessage] && (action == @selector(copy:) || action == @selector(delete:))) {
-        return YES;
+    if (![messageItem isMetaMessage]) {
+        if([messageItem isMediaMessage] && action == @selector(copy:)){
+            return NO;
+        }else if(action == @selector(copy:) || action == @selector(delete:)){
+            return YES;
+        }
     }
 
     return NO;
