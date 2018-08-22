@@ -326,7 +326,12 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 {
     NSAssert(NO, @"Error! required method not implemented in subclass. Need to implement %s", __PRETTY_FUNCTION__);
 }
-
+    
+- (void)didChangeKeyboadFrame:(CGRect *)frame
+{
+    NSAssert(NO, @"Error! required method not implemented in subclass. Need to implement %s", __PRETTY_FUNCTION__);
+}
+    
 - (void)didPressAccessoryButton:(UIButton *)sender
 {
     NSAssert(NO, @"Error! required method not implemented in subclass. Need to implement %s", __PRETTY_FUNCTION__);
@@ -687,8 +692,12 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 {
     id<JSQMessageData> messageItem = [collectionView.dataSource collectionView:collectionView messageDataForItemAtIndexPath:indexPath];
     
-    if (![messageItem isMetaMessage] && (action == @selector(copy:) || action == @selector(delete:))) {
-        return YES;
+    if (![messageItem isMetaMessage]) {
+        if([messageItem isMediaMessage] && action == @selector(copy:)){
+            return NO;
+        }else if(action == @selector(copy:) || action == @selector(delete:)){
+            return YES;
+        }
     }
 
     return NO;
@@ -955,6 +964,8 @@ static void JSQInstallWorkaroundForSheetPresentationIssue26295020(void) {
 
     CGRect keyboardEndFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
 
+    [self didChangeKeyboadFrame:keyboardEndFrame];
+    
     if (CGRectIsNull(keyboardEndFrame)) {
         return;
     }

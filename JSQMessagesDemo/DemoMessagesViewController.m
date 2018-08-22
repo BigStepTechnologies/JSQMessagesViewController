@@ -83,12 +83,10 @@
      */
     [JSQMessagesCollectionViewCell registerMenuAction:@selector(delete:)];
 
-    /**
-     *  Customize your toolbar buttons
-     *
-     *  self.inputToolbar.contentView.leftBarButtonItem = custom button or nil to remove
-     *  self.inputToolbar.contentView.rightBarButtonItem = custom button or nil to remove
-     */
+    
+    self.inputToolbar.contentView.leftBarButtonItem.tintColor = [UIColor blackColor];
+    self.inputToolbar.contentView.rightBarButtonItem.tintColor = [UIColor blackColor];
+    
 
     /**
      *  Set a maximum height for the input toolbar
@@ -357,6 +355,10 @@
     [self finishSendingMessageAnimated:YES];
 }
 
+- (void)didChangeKeyboadFrame:(CGRect)frame
+    {
+        NSLog(@"Frame changed %f",frame.size.height);
+    }
 - (void)didPressAccessoryButton:(UIButton *)sender
 {
     [self.inputToolbar.contentView.textView resignFirstResponder];
